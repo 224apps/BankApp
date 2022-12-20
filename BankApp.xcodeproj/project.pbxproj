@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		452B6B1A2951FFE000A6BD5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B6B192951FFE000A6BD5D /* AppDelegate.swift */; };
-		452B6B1C2951FFE000A6BD5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B6B1B2951FFE000A6BD5D /* SceneDelegate.swift */; };
 		452B6B1E2951FFE000A6BD5D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B6B1D2951FFE000A6BD5D /* LoginViewController.swift */; };
 		452B6B232951FFE200A6BD5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452B6B222951FFE200A6BD5D /* Assets.xcassets */; };
 		452B6B262951FFE200A6BD5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452B6B242951FFE200A6BD5D /* LaunchScreen.storyboard */; };
@@ -17,7 +16,6 @@
 /* Begin PBXFileReference section */
 		452B6B162951FFE000A6BD5D /* BankApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		452B6B192951FFE000A6BD5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		452B6B1B2951FFE000A6BD5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		452B6B1D2951FFE000A6BD5D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		452B6B222951FFE200A6BD5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		452B6B252951FFE200A6BD5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,13 +53,28 @@
 			isa = PBXGroup;
 			children = (
 				452B6B192951FFE000A6BD5D /* AppDelegate.swift */,
-				452B6B1B2951FFE000A6BD5D /* SceneDelegate.swift */,
-				452B6B1D2951FFE000A6BD5D /* LoginViewController.swift */,
+				4537DB40295207DE0026CAFA /* Login */,
+				4537DB3F2952079D0026CAFA /* Ressource Files */,
 				452B6B222951FFE200A6BD5D /* Assets.xcassets */,
 				452B6B242951FFE200A6BD5D /* LaunchScreen.storyboard */,
 				452B6B272951FFE200A6BD5D /* Info.plist */,
 			);
 			path = BankApp;
+			sourceTree = "<group>";
+		};
+		4537DB3F2952079D0026CAFA /* Ressource Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Ressource Files";
+			sourceTree = "<group>";
+		};
+		4537DB40295207DE0026CAFA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				452B6B1D2951FFE000A6BD5D /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +149,6 @@
 			files = (
 				452B6B1E2951FFE000A6BD5D /* LoginViewController.swift in Sources */,
 				452B6B1A2951FFE000A6BD5D /* AppDelegate.swift in Sources */,
-				452B6B1C2951FFE000A6BD5D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
