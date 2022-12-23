@@ -7,17 +7,31 @@
 
 import UIKit
 
+protocol OnboardingContainerViewControllerDelegate: AnyObject {
+    func didFinishOnboarding()
+}
+
 class OnboardingContainerViewController: UIViewController {
+    
+    weak var delegate: OnboardingContainerViewControllerDelegate?
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
     
     var currentVC: UIViewController {
         didSet {
+            guard let index = pages.firstIndex(of: currentVC) else { return }
+            nextButton.isHidden = index == pages.count - 1
+            backButton.isHidden = index == 0
+            doneButton.isHidden = !(index == pages.count - 1)
         }
     }
     
-    let closeButton =  UIButton()
+    let closeButton =  UIButton(type: .system)
+    let backButton = UIButton(type: .system)
+    let nextButton = UIButton(type: .system)
+    let doneButton = UIButton(type: .system)
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -73,6 +87,24 @@ class OnboardingContainerViewController: UIViewController {
     }
     
     private func style(){
+        //NextButton
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.setTitle("Next", for: [])
+        nextButton.titleLabel?.textColor = .black
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .primaryActionTriggered)
+        
+        //BackButton
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.setTitle("Back", for: [])
+        backButton.titleLabel?.textColor = .black
+        backButton.addTarget(self, action: #selector(backTapped), for: .primaryActionTriggered)
+        
+        //DoneButton
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle("Done", for: [])
+        doneButton.titleLabel?.textColor = .black
+        doneButton.addTarget(self, action: #selector(doneTapped), for: .primaryActionTriggered)
+        
         //closeButton
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setTitle("Close", for: [])
@@ -82,11 +114,35 @@ class OnboardingContainerViewController: UIViewController {
 
     
     private func layout(){
+        
+        //nextButton
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: nextButton.bottomAnchor, multiplier: 2)
+               ])
+        
+        
+        //backButton
+        view.addSubview(backButton)
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: backButton.bottomAnchor, multiplier: 4)
+               ])
+        
+        
         //closeButton
         view.addSubview(closeButton)
         NSLayoutConstraint.activate([
                    closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
                    closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+               ])
+        
+        //DoneButton
+        view.addSubview(doneButton)
+        NSLayoutConstraint.activate([
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: doneButton.trailingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: doneButton.bottomAnchor, multiplier: 2)
                ])
     }
     
@@ -126,7 +182,20 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 //MARK: - Actions
 
 extension OnboardingContainerViewController {
-    @objc private func closeTapped(){
-        
+    @objc private func nextTapped(){
+        guard let nextVC = getNextViewController(from: currentVC) else { return  }
+        pageViewController.setViewControllers([nextVC], direction: .forward, animated: true, completion: nil)
     }
+    
+    @objc private func backTapped(){
+        guard let previousVC = getPreviousViewController(from: currentVC) else { return  }
+        pageViewController.setViewControllers([previousVC], direction: .reverse, animated: true, completion: nil)
+    }
+    @objc private func closeTapped(){
+        delegate?.didFinishOnboarding()
+    }
+    @objc private func doneTapped(){
+        delegate?.didFinishOnboarding()
+    }
+
 }
